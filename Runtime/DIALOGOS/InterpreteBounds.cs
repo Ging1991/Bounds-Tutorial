@@ -4,8 +4,10 @@ using Bounds.Infraestructura.Constantes;
 using Bounds.Modulos.Cartas;
 using Bounds.Modulos.Cartas.Ilustradores;
 using Bounds.Modulos.Cartas.Persistencia;
+using Bounds.Modulos.Cartas.Persistencia.Datos;
 using Bounds.Modulos.Cartas.Tinteros;
 using Bounds.Persistencia;
+using Ging1991.Core.Interfaces;
 using Ging1991.Dialogos.Interpretes;
 using Ging1991.Persistencia.Direcciones;
 using UnityEngine;
@@ -18,7 +20,6 @@ namespace Bounds.Dialogos {
 		public GameObject cartaEjemplo1, cartaEjemplo2, cartaEjemplo3;
 		public DueloConstantes.Modo modoDuelo;
 		public string modoDueloCadena;
-		public DatosDeCartas datosDeCartas;
 		public IlustradorDeCartas ilustradorDeCartas;
 
 		public override bool InterpretarAccionEspecial(AccionBounds accion) {
@@ -59,16 +60,15 @@ namespace Bounds.Dialogos {
 		}
 
 
-		public void InicializarCartas() {
+		public void InicializarCartas(IProveedor<int, CartaBD> proveedorCartas) {
 			ITintero tintero = new TinteroBounds();
-			datosDeCartas.Inicializar();
 			ilustradorDeCartas = new IlustradorDeCartas(
 				new DireccionRecursos("Cartas", "Imagenes").Generar(),
 				new DireccionDinamica("IMAGENES", "Cartas").Generar()
 			);
-			cartaEjemplo1.GetComponentInChildren<CartaFrente>().Inicializar(datosDeCartas, ilustradorDeCartas, tintero);
-			cartaEjemplo2.GetComponentInChildren<CartaFrente>().Inicializar(datosDeCartas, ilustradorDeCartas, tintero);
-			cartaEjemplo3.GetComponentInChildren<CartaFrente>().Inicializar(datosDeCartas, ilustradorDeCartas, tintero);
+			cartaEjemplo1.GetComponentInChildren<CartaFrente>().Inicializar(proveedorCartas, ilustradorDeCartas, tintero);
+			cartaEjemplo2.GetComponentInChildren<CartaFrente>().Inicializar(proveedorCartas, ilustradorDeCartas, tintero);
+			cartaEjemplo3.GetComponentInChildren<CartaFrente>().Inicializar(proveedorCartas, ilustradorDeCartas, tintero);
 		}
 
 

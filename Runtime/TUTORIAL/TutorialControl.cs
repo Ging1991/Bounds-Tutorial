@@ -1,9 +1,12 @@
 ﻿using Bounds.Dialogos;
 using Bounds.Modulos.Cartas;
+using Bounds.Modulos.Cartas.Persistencia;
+using Bounds.Modulos.Cartas.Persistencia.Datos;
 using Bounds.Modulos.Persistencia;
 using Bounds.Musica;
 using Bounds.Persistencia;
 using Bounds.Persistencia.Parametros;
+using Ging1991.Core.Interfaces;
 using Ging1991.Dialogos;
 using Ging1991.Dialogos.Persistencia;
 using Ging1991.Persistencia.Direcciones;
@@ -26,8 +29,9 @@ namespace Bounds.Tutorial {
 			ParametrosEscena parametros = parametrosControl.parametros;
 			configuracion = new(parametros.direcciones["CONFIGURACION"]);
 			musicaDeFondo.Inicializar(parametros.direcciones["MUSICA_TIENDA"]);
+			IProveedor<int, CartaBD> proveedorCartas = new LectorCartas(new DireccionRecursos(parametrosControl.parametros.direcciones["CARTAS_DATOS"]));
 
-			interprete.InicializarCartas();
+			interprete.InicializarCartas(proveedorCartas);
 
 			LectorLista<AccionBounds> lector = new LectorLista<AccionBounds>(
 				new DireccionRecursos("TUTORIAL", $"CAPITULO{configuracion.LeerCapituloLeccion()}").Generar(),
