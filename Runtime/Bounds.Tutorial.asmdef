@@ -8,6 +8,7 @@
         "Bounds.Visuales",
         "Bounds.Duelo",
         "Bounds.Mazos",
+        "Bounds.Entrenamiento",
         "Bounds.Modulos.Duelo.Fisicas",
         "Bounds.Persistencia",
 		"Ging1991.Musica",

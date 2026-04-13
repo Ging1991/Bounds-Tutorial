@@ -1,4 +1,5 @@
 ﻿using Bounds.Dialogos;
+using Bounds.Entrenamiento;
 using Bounds.Modulos.Cartas;
 using Bounds.Modulos.Cartas.Persistencia;
 using Bounds.Modulos.Cartas.Persistencia.Datos;
@@ -23,8 +24,10 @@ namespace Bounds.Tutorial {
 		public InterpreteBounds interprete;
 		public ParametrosControl parametrosControl;
 		public MusicaDeFondo musicaDeFondo;
+		public PersonalizarUI personalizarUI;
 
 		void Start() {
+			personalizarUI.Personalizar();
 			parametrosControl.Inicializar();
 			ParametrosEscena parametros = parametrosControl.parametros;
 			configuracion = new(parametros.direcciones["CONFIGURACION"]);
