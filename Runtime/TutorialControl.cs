@@ -1,9 +1,7 @@
 ﻿using Bounds.Dialogos;
-using Bounds.Entrenamiento;
 using Bounds.Modulos.Cartas;
 using Bounds.Modulos.Cartas.Persistencia;
 using Bounds.Modulos.Cartas.Persistencia.Datos;
-using Bounds.Modulos.Persistencia;
 using Bounds.Musica;
 using Bounds.Persistencia;
 using Bounds.Persistencia.Parametros;
@@ -59,7 +57,7 @@ namespace Bounds.Tutorial {
 		}
 
 
-		public void IrVideo() {
+		public void IrVideo() {//
 			string videoId = "RI69hhCVYIc";
 			Application.OpenURL("https://www.youtube.com/watch?v=" + videoId);
 		}

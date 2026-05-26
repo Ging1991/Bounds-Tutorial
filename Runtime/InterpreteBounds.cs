@@ -1,9 +1,8 @@
-using Bounds.Global.Mazos;
 using Bounds.Infraestructura;
 using Bounds.Infraestructura.Constantes;
+using Bounds.Mazos;
 using Bounds.Modulos.Cartas;
 using Bounds.Modulos.Cartas.Ilustradores;
-using Bounds.Modulos.Cartas.Persistencia;
 using Bounds.Modulos.Cartas.Persistencia.Datos;
 using Bounds.Modulos.Cartas.Tinteros;
 using Bounds.Persistencia;
@@ -15,7 +14,7 @@ using UnityEngine.SceneManagement;
 
 namespace Bounds.Dialogos {
 
-	public class InterpreteBounds : Interprete<AccionBounds> {//
+	public class InterpreteBounds : Interprete<AccionBounds> {
 
 		public GameObject cartaEjemplo1, cartaEjemplo2, cartaEjemplo3;
 		public DueloConstantes.Modo modoDuelo;
@@ -85,8 +84,8 @@ namespace Bounds.Dialogos {
 			parametros.jugadorMiniatura1 = miniatura1;
 			parametros.jugadorMiniatura2 = miniatura2;
 
-			Global.Mazo mazo1 = null;
-			Global.Mazo mazo2 = null;
+			Mazo mazo1 = null;
+			Mazo mazo2 = null;
 			if (modoDuelo == DueloConstantes.Modo.TUTORIAL) {
 				mazo1 = new MazoRecursos(new DireccionRecursos("MAZOS/TUTORIAL", nombreMazo1).Generar());
 				mazo2 = new MazoRecursos(new DireccionRecursos("MAZOS/TUTORIAL", nombreMazo2).Generar());
