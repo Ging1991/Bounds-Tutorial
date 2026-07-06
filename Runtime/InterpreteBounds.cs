@@ -1,10 +1,9 @@
+using Bounds.Cartas;
 using Bounds.Infraestructura;
 using Bounds.Infraestructura.Constantes;
 using Bounds.Mazos;
-using Bounds.Modulos.Cartas;
 using Bounds.Modulos.Cartas.Ilustradores;
 using Bounds.Modulos.Cartas.Persistencia.Datos;
-using Bounds.Modulos.Cartas.Tinteros;
 using Bounds.Persistencia;
 using Ging1991.Core.Interfaces;
 using Ging1991.Dialogos.Interpretes;
@@ -16,7 +15,7 @@ namespace Bounds.Dialogos {
 
 	public class InterpreteBounds : Interprete<AccionBounds> {
 
-		public GameObject cartaEjemplo1, cartaEjemplo2, cartaEjemplo3;
+		public CartaFisica ejemplo1, ejemplo2, ejemplo3;
 		public DueloConstantes.Modo modoDuelo;
 		public string modoDueloCadena;
 		public IlustradorDeCartas ilustradorDeCartas;
@@ -33,7 +32,7 @@ namespace Bounds.Dialogos {
 				ControlEscena.GetInstancia().CambiarEscena_menu();
 			}
 
-			if (accion.tipoBounds == "DUELO") {//
+			if (accion.tipoBounds == "DUELO") {
 				JugarDuelo(
 					accion.dueloNombre1, accion.dueloAvatar1, accion.dueloLP1, accion.dueloMazo1,
 					accion.dueloNombre2, accion.dueloAvatar2, accion.dueloLP2, accion.dueloMazo2);
@@ -45,31 +44,18 @@ namespace Bounds.Dialogos {
 
 		private void SetImagenCarta(int indice, int cartaID) {
 			if (indice == 1) {
-				cartaEjemplo1.GetComponent<CartaFisica>().ColocarBocaArriba();
-				cartaEjemplo1.GetComponentInChildren<CartaFrente>().Mostrar(cartaID);
+				ejemplo1.ColocarBocaArriba();
+				ejemplo1.cartaImagen.MostrarCartaID(cartaID);
 			}
 			if (indice == 2) {
-				cartaEjemplo2.GetComponent<CartaFisica>().ColocarBocaArriba();
-				cartaEjemplo2.GetComponentInChildren<CartaFrente>().Mostrar(cartaID);
+				ejemplo2.ColocarBocaArriba();
+				ejemplo2.cartaImagen.MostrarCartaID(cartaID);
 			}
 			if (indice == 3) {
-				cartaEjemplo3.GetComponent<CartaFisica>().ColocarBocaArriba();
-				cartaEjemplo3.GetComponentInChildren<CartaFrente>().Mostrar(cartaID);
+				ejemplo3.ColocarBocaArriba();
+				ejemplo3.cartaImagen.MostrarCartaID(cartaID);
 			}
 		}
-
-
-		public void InicializarCartas(IProveedor<int, CartaBD> proveedorCartas) {
-			ITintero tintero = new TinteroBounds();
-			ilustradorDeCartas = new IlustradorDeCartas(
-				new DireccionRecursos("Cartas", "Imagenes").Generar(),
-				new DireccionDinamica("IMAGENES", "Cartas").Generar()
-			);
-			cartaEjemplo1.GetComponentInChildren<CartaFrente>().Inicializar(proveedorCartas, ilustradorDeCartas, tintero);
-			cartaEjemplo2.GetComponentInChildren<CartaFrente>().Inicializar(proveedorCartas, ilustradorDeCartas, tintero);
-			cartaEjemplo3.GetComponentInChildren<CartaFrente>().Inicializar(proveedorCartas, ilustradorDeCartas, tintero);
-		}
-
 
 		private void JugarDuelo(
 				string nombre1, string miniatura1, int LP1, string nombreMazo1,
