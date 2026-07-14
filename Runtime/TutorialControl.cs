@@ -37,7 +37,7 @@ namespace Bounds.Tutorial {
 			IProveedor<int, CartaBD> proveedorCartas = new LectorCartas(new DireccionRecursos(parametrosControl.parametros.direcciones["CARTAS_DATOS"]));
 
 			LectorLista<AccionBounds> lector = new LectorLista<AccionBounds>(
-				new DireccionRecursos("TUTORIAL", $"CAPITULO{configuracion.LeerCapituloLeccion()}").Generar(),
+				new DireccionRecursos(parametros.direcciones["TUTORIAL"], $"CAPITULO{configuracion.LeerCapituloLeccion()}").Generar(),
 				Ging1991.Persistencia.Lectores.TipoLector.RECURSOS
 			);
 
