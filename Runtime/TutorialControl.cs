@@ -10,6 +10,7 @@ using Bounds.Persistencia.proveedores;
 using Ging1991.Core.Interfaces;
 using Ging1991.Dialogos;
 using Ging1991.Dialogos.Persistencia;
+using Ging1991.Musica;
 using Ging1991.Persistencia.Direcciones;
 using Ging1991.Persistencia.Lectores;
 using UnityEngine;
@@ -24,16 +25,24 @@ namespace Bounds.Tutorial {
 		private Configuracion configuracion;
 		public InterpreteBounds interprete;
 		public ParametrosControl parametrosControl;
-		public MusicaDeFondo musicaDeFondo;
 		public ControlUIBounds personalizarUI;
 		public CartaGenerador cartaGenerador;
+
+		private void InicializarMusica(string direccion) {
+			MusicaAmbiental musicaAmbiental = MusicaAmbiental.Instancia;
+			if (musicaAmbiental.actual != "GENERAL") {
+				musicaAmbiental.Inicializar(new ProveedorAudios(new DireccionRecursos(direccion)));
+				musicaAmbiental.Reproducir("GENERAL");
+			}
+		}
+
 
 		void Start() {
 			parametrosControl.Inicializar();
 			ParametrosEscena parametros = parametrosControl.parametros;
 			personalizarUI.Personalizar(parametros.direcciones["SISTEMA"], parametros.direcciones["COLORES"]);
 			configuracion = new(parametros.direcciones["CONFIGURACION"]);
-			musicaDeFondo.Inicializar(parametros.direcciones["MUSICA_TIENDA"]);
+			InicializarMusica(parametros.direcciones["MUSICA_AMBIENTAL"]);
 			IProveedor<int, CartaBD> proveedorCartas = new LectorCartas(new DireccionRecursos(parametrosControl.parametros.direcciones["CARTAS_DATOS"]));
 
 			LectorLista<AccionBounds> lector = new LectorLista<AccionBounds>(
